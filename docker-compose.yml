@@ -45,6 +45,8 @@ services:
     command: dotnet run
     networks:
     - backend
+    depends_on:
+    - postgres
     ports:
     - published: ${EJEMPLO_2_WEB_PORT:-5000}
       target: 5000
