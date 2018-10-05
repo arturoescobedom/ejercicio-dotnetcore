@@ -5,3 +5,6 @@ Thumbs.db
 
 *.env
 !*example.env
+
+# Ignore database dumps:
+db_dumps/*.dump

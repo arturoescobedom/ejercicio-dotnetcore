@@ -1,0 +1,33 @@
+version: "3.7"
+
+volumes:
+  postgres_data:
+
+networks:
+  backend:
+
+services:
+  postgres:
+    image: postgres:10-alpine
+    volumes:
+    - type: volume
+      source: postgres_data
+      target: /var/lib/postgresql/data
+    - type: bind
+      source: ./db_dumps
+      target: /db_dumps
+    - type: bind
+      source: ./bin/dumpdb
+      target: /usr/local/bin/dumpdb
+      read_only: true
+    - type: bind
+      source: ./bin/restoredb
+      target: /usr/local/bin/restoredb
+      read_only: true
+    ports:
+    - published: ${EJERCICIO_2_PGPORT:-5432}
+      target: 5432
+    networks:
+    - backend
+    environment:
+      POSTGRES_PASSWORD: 3x4mpl3P455w0rd
