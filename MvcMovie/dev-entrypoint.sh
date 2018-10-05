@@ -11,7 +11,8 @@ then
   echo "=== Restoring packages..."
   dotnet restore
 
-  if [ "$2" = "watch" ] && [ "$3" = "run" ]
+  # if [ "$2" = "watch" ] && [ "$3" = "run" ]
+  if [ "$2" = "run" ]
   then
     # 3: Ensure we've got our database up to date:
     echo "=== Updating the database..."
