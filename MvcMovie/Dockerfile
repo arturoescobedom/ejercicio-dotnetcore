@@ -7,6 +7,10 @@ WORKDIR /app
 
 COPY ./MvcMovie.csproj /app/
 
+# If I where to include another executable not available
+# on apt-get... I can copy it from an existing image!
+# COPY --from=icalialabs/wkhtmltopdf:latest /bin/wkhtmltopdf /bin/wkhtmltopdf
+
 RUN dotnet restore
 
 # Stage 2: The Builder stage:
@@ -21,6 +25,10 @@ RUN dotnet publish --configuration Release
 FROM microsoft/dotnet:runtime AS deployable
 
 COPY --from=builder /app/bin/Release/netcoreapp2.0/publish /app
+
+# If I where to include another executable not available
+# on apt-get... I can copy it from an existing image!
+# COPY --from=icalialabs/wkhtmltopdf:latest /bin/wkhtmltopdf /bin/wkhtmltopdf
 
 WORKDIR /app
 
